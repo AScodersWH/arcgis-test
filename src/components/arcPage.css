@@ -1,0 +1,18 @@
+#components-layout-demo-top-side-2{
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 28px 16px 0;
+    float: left;
+  }
+
+#logo{
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 28px 16px -200px;
+    float: left;
+}
+  .site-layout-background {
+    background: black;
+  }
