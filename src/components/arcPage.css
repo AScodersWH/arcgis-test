@@ -14,5 +14,5 @@
     float: left;
 }
   .site-layout-background {
-    background: black;
+    background-image: url("../images/mainT.png");
   }
