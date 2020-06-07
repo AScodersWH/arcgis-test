@@ -3,63 +3,87 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, LineChartOutlined,AreaChartOutlined,EnvironmentFilled } from '@ant-design/icons';
 import './arcPage.css'
 import 'antd/dist/antd.css'; 
+import Uploadss from './uploadFile'
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 export default class ArgMainPage extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+       value: 1,
+       contents: [<Uploadss/>,<Content
+        className="site-layout-background"
+        style={{
+          padding: 24,
+          margin: 0,
+          minHeight: "100%",
+        }}/> ]
+    }
+}
+
+
+handleChanges = (value, key) => {
+  this.setState({
+      value: value
+  })
+}
+
+logout = () => {
+  window.sessionStorage.removeItem("ntId")
+  window.location.href = "http://175.24.65.136/"
+}
+
 render(){
     return (
-  <Layout>
+  <Layout style={{height: "100%",width:"100%",position:"absolute"}}>
     <Header className="header">
       <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-      <Menu.Item key="0" style={{position:"relative",right:"44%"}}>海底滑坡监测预警系统</Menu.Item>
-        <Menu.Item key="1">数据</Menu.Item>
-        <Menu.Item key="2">图片</Menu.Item>
+      <Menu theme="dark" mode="horizontal" defaultSelectedKeys="">
+      <Menu.Item onClick={this.handleChanges.bind(this,1)} style={{fontSize:"large",flat:"left",right:"4%"}}>海底滑坡监测预警系统</Menu.Item>
+          <SubMenu defaultSelectedKeys="" icon={<UserOutlined/>} style={{float:"right",left:"3%"}}>
+            <Menu.Item >{window.sessionStorage.getItem("ntId")}</Menu.Item>
+            <Menu.Item onClick={this.logout}>注销</Menu.Item>
+          </SubMenu>
 
       </Menu>
     </Header>
     <Layout>
-      <Sider width={200} className="site-layout-background">
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub0']}
-          style={{ height: '100%', borderRight: 0 }}
+      <Sider width={160} style={{overflow:"scorll",height:"100%"}} className="site-layout-background">
+        <Menu defaultSelectedKeys=""
+          mode="vertical"
+          style={{ height: '100%', borderRight: 0 ,backgroundColor:"#F8FBFD"}}
+          value={this.state.contentNum}
         >
-            <SubMenu key="sub0" icon={<EnvironmentFilled />} title="研究区概况"/>
- 
-          <SubMenu key="sub1" icon={<AreaChartOutlined />}  title="地质环境要素">
-            <Menu.Item key="1">水深测量成果图</Menu.Item>
-            <Menu.Item key="2">地貌图</Menu.Item>
-            <Menu.Item key="3">钻孔图</Menu.Item>
-            <Menu.Item key="4">经纬度</Menu.Item>
+            <Menu.Item icon={<EnvironmentFilled />} onClick={this.handleChanges.bind(this,1)}>
+            研究区概况
+            </Menu.Item>
+          <SubMenu defaultSelectedKeys="" icon={<AreaChartOutlined />}  title="地质环境要素">
+            <Menu.Item>水深测量成果图</Menu.Item>
+            <Menu.Item>地貌图</Menu.Item>
+            <Menu.Item>钻孔图</Menu.Item>
+            <Menu.Item>经纬度</Menu.Item>
           </SubMenu>
-          <SubMenu key="sub2" icon={<LaptopOutlined />} title="数据展示">
-            <Menu.Item key="5">孔压</Menu.Item>
-            <Menu.Item key="6">流速</Menu.Item>
-            <Menu.Item key="7">海床滑动变形</Menu.Item>
-            <Menu.Item key="8">波浪</Menu.Item>
+          <SubMenu defaultSelectedKeys="" icon={<LaptopOutlined />}  title="数据展示">
+            <Menu.Item>孔压</Menu.Item>
+            <Menu.Item>流速</Menu.Item>
+            <Menu.Item>海床滑动变形</Menu.Item>
+            <Menu.Item>波浪</Menu.Item>
           </SubMenu>
-          <SubMenu key="sub3" icon={<LineChartOutlined />} title="数据分析">
+          <SubMenu defaultSelectedKeys="" icon={<LineChartOutlined />} title="数据分析">
             
           </SubMenu>
-          <SubMenu key="sub3" icon={<NotificationOutlined />} title="预警信息发布">
+          <SubMenu defaultSelectedKeys="" icon={<NotificationOutlined />} title="预警信息发布">
           
           </SubMenu>
+          <Menu.Item key="5" onClick={this.handleChanges.bind(this,0)}>
+            上传文件
+            </Menu.Item>
         </Menu>
       </Sider>
-      <Layout style={{ padding: '0 24px 24px' }}>
+      <Layout style={{ padding: '20px 24px 24px', height:"100%"}}>
         
-        <Content
-          className="site-layout-background"
-          style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 680,
-            
-          }}
-        >
-        </Content>
+       
+        {this.state.contents[this.state.value]}
       </Layout>
     </Layout>
   </Layout>
