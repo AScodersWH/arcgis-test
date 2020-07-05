@@ -75,23 +75,34 @@ onDeletes = (urls,fileName) =>{
     fetch(urls,{
         method: "DELETE"     
     }).then(res => res.text()).then(resVals => {
+      let targets = this.state.targetF
         this.onUpdate()
-        let targets = this.state.targetF
         alert("删除成功") 
-        this.setState({
-            targetF: targets
-        })
+      
     }).catch((error)=>{
         alert("删除失败")
     })
 }
+
+onCheck = (fileName) => {
+    var data = {
+        file_names: fileName,
+    }
+
+    var path = {
+        pathname : "/show/"+data.file_names
+    }
+    this.props.history.push(path)
+
+}
+
 columns = [
     { title: '文件名', dataIndex: 'name', key: 'name' },
     { title: '操作', dataIndex: '', render: (text, record) => (
       <Space size="middle">
         <a href={this.state.downloadURL+this.state.targetF + "&fileName=" + record.name}>下载</a>
         <a onClick={this.onDeletes.bind(this,this.state.deleteURL+this.state.targetF + "&fileName=" + record.name,record.name)}>删除</a>
-        <a href="http://175.24.65.136/GIS/#/show">查看</a>
+        <a onClick={this.onCheck.bind(this,this.state.targetF + "&fileName=" + record.name)}>查看</a>
         <a>数据分析</a>
       </Space>
     ) },
@@ -103,12 +114,11 @@ componentWillMount(){
 render(){
     return ( 
     <div >  
-    <Radio.Group onChange={this.onChange} style={{float:"center"}} value={this.state.targetF}>
+    <Radio.Group onChange={this.onChange} style={{float:"center",marginBottom:"20px"}} value={this.state.targetF}>
     <Radio.Button value={"pore_pressure"}>孔压</Radio.Button>
     <Radio.Button value={"flow_rate"}>流速</Radio.Button>
     <Radio.Button value={"seabed_sliding"}>海床滑动变形</Radio.Button>
     <Radio.Button value={"wave"}>波浪</Radio.Button>
-    <Radio.Button value={"misc"}>未分类文件</Radio.Button>
     </Radio.Group>  
     <Table columns={this.columns} dataSource={this.state.data_input}className="tables"/>
     </div>)

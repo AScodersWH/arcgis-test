@@ -16,16 +16,28 @@
   .site-layout-background {
     background-image: url("../images/mainT.png");
     padding: 24;
-    min-height: "100%"
+    background-size: contain;
+    background-repeat:no-repeat; 
   }
 
   .shuishen{
-    background-image: url("https://s4.aconvert.com/convert/p3r68-cdx67/atqy7-ptegm.jpg");
+    background-image: url("../images/shuishen.jpg");
+    background-size: contain;
+    background-repeat:no-repeat; 
   }
   .zuankong{
     background-image: url("../images/zuankong.jpg");
+    background-size: contain;
+    background-repeat:no-repeat; 
   }
   .xianchang{
+    
     background-image: url("../images/xianchang.jpg");
-
+    background-size: contain;
+    background-repeat:no-repeat; 
   }
+  .gis{
+    size:contain;
+    width:"80%"
+  }
+  

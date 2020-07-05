@@ -5,6 +5,7 @@ import ArgMainPage from './components/arcPage'
 import Earth from './components/planetEarth/earth';
 import PrivateRoute from './components/privateRoute';
 import FileShow from './fileShow'
+import GIS from './components/gisMapper'
 import {
     HashRouter as Router,
     Route,
@@ -18,7 +19,7 @@ function App() {
         <div>
         <Switch>
           <PrivateRoute exact path='/' component={ArgMainPage}/>
-          <PrivateRoute exact path='/show' component={FileShow}/>
+          <PrivateRoute exact path='/show/:file_names' component={FileShow}/>
           <Route exact path='/login' component={Earth} />
         </Switch>
         </div>

@@ -41,8 +41,8 @@ export default class Uploadss extends React.Component {
     render(){
 return(
     <div>
-    <Radio.Group onChange={this.onChange}  value={this.state.targetFolder}>
-    <Radio value={"pore_pressure"}>孔压</Radio>
+    <Radio.Group onChange={this.onChange} style={{marginBottom:"20px"}} value={this.state.targetFolder}>
+    <Radio  value={"pore_pressure"}>孔压</Radio>
     <Radio value={"flow_rate"}>流速</Radio>
     <Radio value={"seabed_sliding"}>海床滑动变形</Radio>
     <Radio value={"wave"}>波浪</Radio>

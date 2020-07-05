@@ -1,20 +1,27 @@
-import {SpreadSheets} from '@grapecity/spread-sheets-react';
 
-import '@grapecity/spread-sheets/styles/gc.spread.sheets.excel2016colorful.css';
 
-import React, { Component } from 'react'
+import React, { Component ,Button} from 'react'
 import 'antd/dist/antd.css'; 
 import FileViewer from 'react-file-viewer';
-import file from './components/planetEarth/good.csv'
-const type = 'csv'
 
 export default class FileShow extends Component {
+  constructor(props){
+    super(props)
+    const file_name = "http://175.24.65.136:8318/file/downloadFile?dir=" + this.props.match.params.file_names;
+    const type = this.props.match.params.file_names.split(".")[1]
+    
+    this.state = {
+        file: file_name,
+        type: type
+    }
+}
+
   render() {
     return (
       <div style={{zIndex:"9999",height:"800px"}}>
       <FileViewer
-        fileType={type}
-        filePath={file}
+        fileType={this.state.type}
+        filePath={this.state.file}
         />
         </div>
     );

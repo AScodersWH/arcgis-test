@@ -5,7 +5,7 @@ class PrivateRoute extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAuthenticated: window.sessionStorage.getItem("ntId")=="yss" ? true: false
+            isAuthenticated: window.sessionStorage.getItem("ntId")=="yss" | window.sessionStorage.getItem("ntId")=="wanghao" ? true: false
         }
     }
 
