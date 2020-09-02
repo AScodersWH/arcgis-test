@@ -23,6 +23,7 @@ export default class ArgMainPage extends React.Component {
         <Content className="shuishen"/>,
         <Content className="zuankong"/>,
         <Content className="xianchang"/>,
+        <Content className="gongchengdizhijiepou"/>,
         <GisPage fileName="http://175.24.65.136:8318/files/研究区经纬度加深度.csv" className="gis"/>
       ,]
     }
@@ -66,7 +67,7 @@ render(){
             <Menu.Item onClick={this.handleChanges.bind(this,3)}>水深测量成果图</Menu.Item>
             <Menu.Item onClick={this.handleChanges.bind(this,5)}>地貌图</Menu.Item>
             <Menu.Item onClick={this.handleChanges.bind(this,4)}>钻孔图</Menu.Item>
-            <Menu.Item >经纬度</Menu.Item>
+            <Menu.Item onClick={this.handleChanges.bind(this,6)}>工程地质解剖图</Menu.Item>
           </SubMenu>
           <Menu.Item defaultSelectedKeys="" icon={<LaptopOutlined />} onClick={this.handleChanges.bind(this,2)}>
           数据展示

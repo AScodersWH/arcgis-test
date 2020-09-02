@@ -26,11 +26,10 @@ onChange = e => {
   });
 };
 
-onUpdate = () => {
+onUpdate =  (targetFFF) => {
     fetch('http://175.24.65.136:8318/file/uploads',{
         method: "GET"     
     }).then(res => res.text()).then(resVals => {
-      console.log(resVals)
       let resVal = JSON.parse(resVals)
       let result = {
           pore_pressure:[],
@@ -64,16 +63,15 @@ onUpdate = () => {
           let single = {"name":file_name}
           result.misc.unshift(single)
       }}
-      console.log(result)
       this.setState({
           datas: result,
-          data_input: result.pore_pressure
+          data_input: result[targetFFF]
       })
   
     })    
 }
 
-onDeletes = (urls,fileName) =>{
+onDeletes = (urls,fileName,targetFF) =>{
   if (window.sessionStorage.getItem("ntId") != 'yss'){
     alert("很抱歉，您没有管理员权限，无法删除当前文件")
    } else{
@@ -82,7 +80,7 @@ onDeletes = (urls,fileName) =>{
     }).then(res => res.text()).then(resVals => {
        
       
-        this.onUpdate()
+        this.onUpdate(targetFF)
         alert("删除成功") 
        
       
@@ -108,7 +106,6 @@ onAnalyze = (fileName) => {
   fetch("http://175.24.65.136:8318/file/downloadFile?dir=misc&fileName=" + fileName.split('.')[0] + ".txt",{
     method: "GET"     
 }).then(res => res.text()).then(resVals => {
-  console.log(resVals)
   var ppp = ""
   if(resVals == ppp){
     this.setState({
@@ -137,7 +134,7 @@ columns = [
     { title: '操作', dataIndex: '', render: (text, record) => (
       <Space size="middle">
         <a href={this.state.downloadURL+this.state.targetF + "&fileName=" + record.name}>下载</a>
-        <a onClick={this.onDeletes.bind(this,this.state.deleteURL+this.state.targetF + "&fileName=" + record.name,record.name)}>删除</a>
+        <a onClick={this.onDeletes.bind(this,this.state.deleteURL+this.state.targetF + "&fileName=" + record.name,record.name,this.state.targetF)}>删除</a>
         <a onClick={this.onCheck.bind(this,this.state.targetF + "&fileName=" + record.name)}>查看</a>
         <a onClick={this.onAnalyze.bind(this,record.name)}> 数据分析</a>
       </Space>
@@ -145,7 +142,7 @@ columns = [
     
   ];
 componentWillMount(){    
-  this.onUpdate()
+  this.onUpdate("pore_pressure")
 }
 render(){
     return ( 

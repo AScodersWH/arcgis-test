@@ -31,8 +31,12 @@
     background-repeat:no-repeat; 
   }
   .xianchang{
-    
     background-image: url("../images/xianchang.jpg");
+    background-size: contain;
+    background-repeat:no-repeat; 
+  }
+  .gongchengdizhijiepou{
+    background-image: url("../images/gcdzjpt.jpg");
     background-size: contain;
     background-repeat:no-repeat; 
   }

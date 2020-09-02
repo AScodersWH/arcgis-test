@@ -24,7 +24,7 @@ export default class Uploadss extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            targetFolder: "other"
+            targetFolder: "pore_pressure"
         }
     }
 
