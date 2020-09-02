@@ -75,7 +75,7 @@ render(){
           {/* <SubMenu defaultSelectedKeys="" icon={<LineChartOutlined />} title="数据分析">
             
           </SubMenu> */}
-          <Menu.Item defaultSelectedKeys="" onClick={this.handleChanges.bind(this,6)} icon={<NotificationOutlined />}>
+          <Menu.Item defaultSelectedKeys="" onClick={this.handleChanges.bind(this,7)} icon={<NotificationOutlined />}>
           预警信息发布
           </Menu.Item>
           <Menu.Item key="5" 

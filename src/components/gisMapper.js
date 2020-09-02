@@ -56,9 +56,10 @@ export default class GisMapper extends Component {
                 symbol: {
                     type: "simple-marker",
                     size: 6,
-                    color: "red",
+                    color: [255,245,245,0.01],
                     outline: {
-                        width: 0.5,
+                        opacity: 0.01,
+                        width: 0,
                         color: "white"
                     }
                 }
