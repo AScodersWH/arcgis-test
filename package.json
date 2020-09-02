@@ -15,6 +15,7 @@
     "custom-error": "^0.2.1",
     "esri": "^0.0.1-security",
     "esri-loader": "^2.14.0",
+    "intro.js": "^2.9.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-file-viewer": "^1.2.1",

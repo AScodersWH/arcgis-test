@@ -8,7 +8,6 @@ export default class Earth extends React.Component{
     onFinish = values => {
         window.event.preventDefault()
         window.sessionStorage.setItem('ntId',values.username)
-        console.log(values.username)
         window.location.href="http://175.24.65.136/GIS"
         };
 render(){

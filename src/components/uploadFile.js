@@ -10,10 +10,8 @@ const props = {
   multiple: true,
   action: 'ttp://175.24.65.136:8318/file/uploadFile',
   onChange(info) {
-    console.log(info.file, info.fileList);
     const { status } = info;
     if (status !== 'uploading') {
-      console.log(info.file, info.fileList);
     }
     if (status === 'done') {
     message.success(`${info.file.name} file uploaded successfully.`);
@@ -31,9 +29,7 @@ export default class Uploadss extends React.Component {
     }
 
     onChange = e => {
-        console.log( e.target.value);
         props.action = "http://175.24.65.136:8318/file/uploadFile?dir=" + e.target.value
-        console.log(props.action)
         this.setState({
           targetFolder: e.target.value,
         });
@@ -46,6 +42,7 @@ return(
     <Radio value={"flow_rate"}>流速</Radio>
     <Radio value={"seabed_sliding"}>海床滑动变形</Radio>
     <Radio value={"wave"}>波浪</Radio>
+    <Radio value={"misc"}>数据分析描述文件</Radio>
   </Radio.Group>
   <Dragger {...props}>
     <p className="ant-upload-drag-icon">

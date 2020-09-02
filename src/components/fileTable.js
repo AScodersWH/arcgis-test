@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Table, Radio ,Space} from 'antd';
+import {  Table, Radio ,Space, Modal, Avatar} from 'antd';
 import 'antd/dist/antd.css'; 
 
 
@@ -12,12 +12,14 @@ export default class fileTable extends React.Component {
        deleteURL:"http://175.24.65.136:8318/file/delete?dir=",
        targetF:"pore_pressure",
        datas:{},
-       data_input:[]
+       data_input:[],
+       visible: false,
+       picSource: "",
+       textSource: ""
     }
 }
 
 onChange = e => {
-  console.log( e.target.value);
   this.setState({
     targetF: e.target.value,
     data_input: this.state.datas[e.target.value]
@@ -72,16 +74,22 @@ onUpdate = () => {
 }
 
 onDeletes = (urls,fileName) =>{
+  if (window.sessionStorage.getItem("ntId") != 'yss'){
+    alert("很抱歉，您没有管理员权限，无法删除当前文件")
+   } else{
     fetch(urls,{
         method: "DELETE"     
     }).then(res => res.text()).then(resVals => {
-      let targets = this.state.targetF
+       
+      
         this.onUpdate()
         alert("删除成功") 
+       
       
     }).catch((error)=>{
         alert("删除失败")
     })
+  }
 }
 
 onCheck = (fileName) => {
@@ -96,6 +104,34 @@ onCheck = (fileName) => {
 
 }
 
+onAnalyze = (fileName) => {
+  fetch("http://175.24.65.136:8318/file/downloadFile?dir=misc&fileName=" + fileName.split('.')[0] + ".txt",{
+    method: "GET"     
+}).then(res => res.text()).then(resVals => {
+  console.log(resVals)
+  var ppp = ""
+  if(resVals == ppp){
+    this.setState({
+      visible: false,
+      picSource: "http://175.24.65.136:8318/file/downloadFile?dir=misc&fileName=" + fileName.split('.')[0] + ".jpg",
+      textSource: "当前文件没有分析报告"
+    });
+  }
+  else{
+  this.setState({
+    visible: true,
+    picSource: "http://175.24.65.136:8318/file/downloadFile?dir=misc&fileName=" + fileName.split('.')[0] + ".jpg",
+    textSource: resVals
+  })}
+})
+}
+
+handleCancel = () => {
+  this.setState({
+    visible: false,
+  });
+};
+
 columns = [
     { title: '文件名', dataIndex: 'name', key: 'name' },
     { title: '操作', dataIndex: '', render: (text, record) => (
@@ -103,7 +139,7 @@ columns = [
         <a href={this.state.downloadURL+this.state.targetF + "&fileName=" + record.name}>下载</a>
         <a onClick={this.onDeletes.bind(this,this.state.deleteURL+this.state.targetF + "&fileName=" + record.name,record.name)}>删除</a>
         <a onClick={this.onCheck.bind(this,this.state.targetF + "&fileName=" + record.name)}>查看</a>
-        <a>数据分析</a>
+        <a onClick={this.onAnalyze.bind(this,record.name)}> 数据分析</a>
       </Space>
     ) },
     
@@ -119,8 +155,18 @@ render(){
     <Radio.Button value={"flow_rate"}>流速</Radio.Button>
     <Radio.Button value={"seabed_sliding"}>海床滑动变形</Radio.Button>
     <Radio.Button value={"wave"}>波浪</Radio.Button>
+    <Radio.Button style={{ display: window.sessionStorage.getItem("ntId")=='yss' ? "" : "none"}} value={"misc"}>数据分析描述文件</Radio.Button>
     </Radio.Group>  
     <Table columns={this.columns} dataSource={this.state.data_input}className="tables"/>
+    <Modal
+          title="分析报告"
+          visible={this.state.visible}
+          onCancel={this.handleCancel}>
+        <img style={{width:"300px",height:"300px"}} src={this.state.picSource} />
+        <p>描述:</p>
+        <p>{this.state.textSource}</p>
+        
+        </Modal>
     </div>)
     }
 }

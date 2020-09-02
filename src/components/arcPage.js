@@ -23,7 +23,7 @@ export default class ArgMainPage extends React.Component {
         <Content className="shuishen"/>,
         <Content className="zuankong"/>,
         <Content className="xianchang"/>,
-        <GisPage fileName="http://175.24.65.136:8318/files/部分波浪数据.csv" className="gis"/>
+        <GisPage fileName="http://175.24.65.136:8318/files/研究区经纬度加深度.csv" className="gis"/>
       ,]
     }
 }
@@ -71,12 +71,12 @@ render(){
           <Menu.Item defaultSelectedKeys="" icon={<LaptopOutlined />} onClick={this.handleChanges.bind(this,2)}>
           数据展示
           </Menu.Item>
-          <SubMenu defaultSelectedKeys="" icon={<LineChartOutlined />} title="数据分析">
+          {/* <SubMenu defaultSelectedKeys="" icon={<LineChartOutlined />} title="数据分析">
             
-          </SubMenu>
-          <SubMenu defaultSelectedKeys="" onTitleClick={this.handleChanges.bind(this,6)} icon={<NotificationOutlined />} title="预警信息发布">
-          
-          </SubMenu>
+          </SubMenu> */}
+          <Menu.Item defaultSelectedKeys="" onClick={this.handleChanges.bind(this,6)} icon={<NotificationOutlined />}>
+          预警信息发布
+          </Menu.Item>
           <Menu.Item key="5" 
           onClick={this.handleChanges.bind(this,0)}
           style={{display: window.sessionStorage.getItem("ntId")=='yss' ? "" : "none"}}

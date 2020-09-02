@@ -18,17 +18,14 @@ export default class GisMapper extends Component {
         // var need to be get from backend
         var csvUrl = this.props.fileName;
         var csvFieldInfos = [
-            {
-                fieldName: "Temperature",
-                label: "温度"
-            },
+
             {
                 fieldName: "Depth",
                 label: "深度"
             }
         ];
-        var title = "Wave";
-        const warning = "Temperature > 30";
+        var title = "深度";
+        const warning = "Depth > -75";
 
 
 
@@ -39,7 +36,7 @@ export default class GisMapper extends Component {
         var view = new MapView({
             container: "viewDiv",
             map: map,
-            center: [-118.80500, 34.02700],
+            center: [122.353737408,29.873625505],
             zoom: 13
         });
 
@@ -103,7 +100,7 @@ export default class GisMapper extends Component {
   render() {
     return (
 
-    <div id="viewDiv" style={{height:"80%",width:"80%",zIndex:"99999",position:"absolute"}}>
+    <div id="viewDiv" style={{height:"80%",width:"80%",position:"absolute"}}>
     </div>
     );
   }

@@ -5,7 +5,6 @@ import ArgMainPage from './components/arcPage'
 import Earth from './components/planetEarth/earth';
 import PrivateRoute from './components/privateRoute';
 import FileShow from './fileShow'
-import GIS from './components/gisMapper'
 import {
     HashRouter as Router,
     Route,
