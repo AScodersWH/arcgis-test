@@ -160,7 +160,7 @@ render(){
           visible={this.state.visible}
           onCancel={this.handleCancel}>
         <img style={{width:"300px",height:"300px"}} src={this.state.picSource} />
-        <p>描述:</p>
+        <p style={{marginTop:"15px"}}>描述:</p>
         <p>{this.state.textSource}</p>
         
         </Modal>
